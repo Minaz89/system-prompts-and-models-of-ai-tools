@@ -1,0 +1,492 @@
+[
+  {
+    "name": "SemanticSearch",
+    "description": "Semantic search that finds code by meaning, not exact text",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "A complete question about what you want to understand."
+        },
+        "target_directories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Prefix directory paths to limit search scope (single directory only, no glob patterns)"
+        },
+        "num_results": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 25,
+          "description": "The number of results to return. Defaults to 25."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "Shell",
+    "description": "Executes a given command in a shell session with optional block_until_ms, working_directory, description, notify_on_output.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "working_directory": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "block_until_ms": {
+          "type": "number"
+        },
+        "notify_on_output": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "command"
+      ]
+    }
+  },
+  {
+    "name": "Grep",
+    "description": "Search tool built on ripgrep. Supports regex, glob filters, output modes content/files_with_matches/count, context lines, multiline.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "glob": {
+          "type": "string"
+        },
+        "output_mode": {
+          "type": "string",
+          "enum": [
+            "content",
+            "files_with_matches",
+            "count"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "head_limit": {
+          "type": "number"
+        },
+        "offset": {
+          "type": "number"
+        },
+        "multiline": {
+          "type": "boolean"
+        },
+        "-i": {
+          "type": "boolean"
+        },
+        "-A": {
+          "type": "number"
+        },
+        "-B": {
+          "type": "number"
+        },
+        "-C": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "pattern"
+      ]
+    }
+  },
+  {
+    "name": "Read",
+    "description": "Read file contents. Supports images (jpeg/jpg, png, gif, webp). Optional offset/limit for large files. Line numbers may appear as LINE_NUMBER|LINE_CONTENT.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "Write",
+    "description": "Write or overwrite a file.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "contents": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "contents"
+      ]
+    }
+  },
+  {
+    "name": "StrReplace",
+    "description": "Exact string replacement in files. Supports replace_all.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "old_string": {
+          "type": "string"
+        },
+        "new_string": {
+          "type": "string"
+        },
+        "replace_all": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path",
+        "old_string",
+        "new_string"
+      ]
+    }
+  },
+  {
+    "name": "Delete",
+    "description": "Delete a file at the specified path.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "Glob",
+    "description": "Search for files matching a glob pattern, sorted by modification time.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "glob_pattern": {
+          "type": "string"
+        },
+        "target_directory": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "glob_pattern"
+      ]
+    }
+  },
+  {
+    "name": "Task",
+    "description": "Launch specialized subagents (generalPurpose, cursor-guide, best-of-n-runner, cavecrew-builder, cavecrew-investigator, cavecrew-reviewer, codex-rescue, API Readiness Analyzer). Supports model slug, resume, readonly, file_attachments.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "subagent_type": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "resume": {
+          "type": "string"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "file_attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "description",
+        "prompt"
+      ]
+    }
+  },
+  {
+    "name": "TodoWrite",
+    "description": "Create and manage a structured task list. merge=true merges by id.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "todos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "in_progress",
+                  "completed",
+                  "cancelled"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "content",
+              "status"
+            ]
+          }
+        },
+        "merge": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "todos"
+      ]
+    }
+  },
+  {
+    "name": "SwitchMode",
+    "description": "Switch interaction mode between plan and agent.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "target_mode_id": {
+          "type": "string",
+          "enum": [
+            "plan",
+            "agent"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_mode_id"
+      ]
+    }
+  },
+  {
+    "name": "GenerateImage",
+    "description": "Generate an image from a text description. Only when user explicitly asks for an image.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "reference_image_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "description"
+      ]
+    }
+  },
+  {
+    "name": "WebSearch",
+    "description": "Search the web for real-time information.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "search_term": {
+          "type": "string"
+        },
+        "explanation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "search_term"
+      ]
+    }
+  },
+  {
+    "name": "WebFetch",
+    "description": "Fetch a URL and return readable markdown content.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    }
+  },
+  {
+    "name": "ReadLints",
+    "description": "Read linter errors for files or directories.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "EditNotebook",
+    "description": "Edit Jupyter notebook cells by index.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "target_notebook": {
+          "type": "string"
+        },
+        "cell_idx": {
+          "type": "number"
+        },
+        "is_new_cell": {
+          "type": "boolean"
+        },
+        "cell_language": {
+          "type": "string"
+        },
+        "old_string": {
+          "type": "string"
+        },
+        "new_string": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_notebook",
+        "cell_idx",
+        "is_new_cell",
+        "cell_language",
+        "old_string",
+        "new_string"
+      ]
+    }
+  },
+  {
+    "name": "AskQuestion",
+    "description": "Collect structured multiple-choice answers from the user.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "questions": {
+          "type": "array"
+        },
+        "allow_multiple": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "questions"
+      ]
+    }
+  },
+  {
+    "name": "Await",
+    "description": "Poll a background shell by shell_id, block_until_ms, or regex pattern.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "shell_id": {
+          "type": "string"
+        },
+        "block_until_ms": {
+          "type": "number"
+        },
+        "pattern": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "ListMcpResources",
+    "description": "List MCP server resources.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "FetchMcpResource",
+    "description": "Read a specific MCP resource by server and URI.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "downloadPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "server",
+        "uri"
+      ]
+    }
+  }
+]
