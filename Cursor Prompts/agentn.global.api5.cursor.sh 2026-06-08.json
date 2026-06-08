@@ -1,0 +1,1745 @@
+{
+  "capture_metadata": {
+    "captured_at": "2026-06-08",
+    "cursor_agent_version": "2026.06.04-5fd875e",
+    "host": "https://agentn.global.api5.cursor.sh",
+    "protocol": "Connect-RPC over HTTP/2 (JSON encoding for unary probes)",
+    "resolved_via": "api2.cursor.sh/aiserver.v1.ServerConfigService/GetServerConfig \u2192 agentUrlConfig",
+    "auth": "Bearer session token from ~/.config/cursor/auth.json (not included)",
+    "notes": [
+      "agentn is the global agent inference backend for Cursor CLI headless runs",
+      "System prompt + tool schemas are assembled server-side during RunSSE/Run; not returned by GetServerConfig",
+      "Observed input token budget ~69k-90k on trivial turns (includes cached harness + skills + rules)",
+      "GetServerConfig is served from api2.cursor.sh but includes agentUrlConfig pointing here"
+    ]
+  },
+  "resolution": {
+    "config_endpoint": "https://api2.cursor.sh/aiserver.v1.ServerConfigService/GetServerConfig",
+    "agent_url_config": {
+      "agentUrl": "https://agentn.global.api5.cursor.sh",
+      "agentnUrl": "https://agentn.global.api5.cursor.sh"
+    },
+    "config_version": "063f73a7-c7a3-4ec9-bd61-f4680e30189d",
+    "http2_config": null,
+    "cli_sandbox_default_enabled": false
+  },
+  "agent_service": {
+    "service": "agent.v1.AgentService",
+    "base_url": "https://agentn.global.api5.cursor.sh",
+    "methods": [
+      "Run (BiDiStreaming)",
+      "RunSSE (ServerStreaming)",
+      "RunPoll (ServerStreaming)",
+      "NameAgent",
+      "UpdateConversationMetadata",
+      "CreateTranscriptOverview",
+      "GetUsableModels",
+      "GetDefaultModelForCli",
+      "GetAllowedModelIntents",
+      "UploadConversationBlobs",
+      "GetSignedUrlForAttachedMedia",
+      "NotifyConversationClone",
+      "GetNewChatNudgeLegacyModelPicker",
+      "GetNewChatNudgeParameterizedModelPicker",
+      "TrackEvents",
+      "Batch",
+      "BootstrapStatsig",
+      "GetFirstWindowStatsigDecision",
+      "SubmitLogs",
+      "IngestConversation",
+      "UploadIssueTrace",
+      "DownloadIssueTraces",
+      "CreateAutomation",
+      "ListAutomations",
+      "GetAutomation",
+      "UpdateAutomation",
+      "UpdateAutomationAuthoringMode",
+      "ValidateAutomationSpec",
+      "ApplyAutomationSpec",
+      "DeleteAutomation",
+      "TestAutomation",
+      "TestAutomationFilter",
+      "ListAutomationRuns",
+      "GetAutomationRun",
+      "ListAllRuns",
+      "GetRunSummary",
+      "GetSecuritybotResolutionStats",
+      "CancelAutomationRun",
+      "CancelAllAutomationRuns",
+      "ListAutomationMemories",
+      "GetAutomationMemory",
+      "UpdateAutomationMemory",
+      "ListWorkflowTemplates",
+      "GetWorkflowTemplate",
+      "CreateWorkflowFromTemplate",
+      "ValidateAutomationTools",
+      "BuilderCompletion",
+      "DisableAutomationForTeamShutdown",
+      "GetSentryAuthUrl",
+      "ConnectSentryCallback",
+      "GetSentryStatus",
+      "GetSentryProjects",
+      "DisconnectSentry",
+      "BidiAppend"
+    ],
+    "primary_streaming_rpc": "agent.v1.AgentService/RunSSE",
+    "run_request_fields_observed_in_cli_bundle": [
+      "conversationState",
+      "action",
+      "modelDetails",
+      "requestedModel",
+      "mcpTools",
+      "conversationGroupId",
+      "conversationId",
+      "mcpFileSystemOptions",
+      "customSystemPrompt",
+      "harness",
+      "suggestNextPrompt",
+      "subagentTypeName",
+      "excludeWorkspaceContext",
+      "devRawModelSlug",
+      "selectedSubagentModels",
+      "subagentModelOverrides",
+      "selectedSubagentModelDetails",
+      "preFetchedBlobs",
+      "clientSupportsInlineImages",
+      "canCreateCloudSubagents",
+      "suppressSubagentProgressUpdateTool"
+    ]
+  },
+  "chat_config_from_server_config": {
+    "fullContextTokenLimit": 30000,
+    "maxRuleLength": 100000,
+    "maxMcpTools": 100,
+    "warnMcpTools": 80,
+    "summarizationMessage": "Chat context summarized.",
+    "numFilesForMemoryGeneration": 999999,
+    "numSummarizationsBeforeWarningShown": 10,
+    "cursorRulesReadFileFixEnabled": true,
+    "dontSendCtrlCBeforeCommand": true,
+    "clientStatsigPollIntervalMs": 300000,
+    "listDirV2PredefinedIgnoreGlobs": [
+      "**/node_modules/*",
+      "**/__pycache__/*",
+      "**/.*"
+    ]
+  },
+  "api_responses": {
+    "GetUsableModels": {
+      "models": [
+        {
+          "modelId": "default",
+          "displayModelId": "auto",
+          "displayName": "Auto",
+          "displayNameShort": "Auto",
+          "aliases": [
+            "auto"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-low",
+          "displayModelId": "gpt-5.3-codex-low",
+          "displayName": "Codex 5.3 Low",
+          "displayNameShort": "Codex 5.3 Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-low-fast",
+          "displayModelId": "gpt-5.3-codex-low-fast",
+          "displayName": "Codex 5.3 Low Fast",
+          "displayNameShort": "Codex 5.3 Low Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex",
+          "displayModelId": "gpt-5.3-codex",
+          "displayName": "Codex 5.3",
+          "displayNameShort": "Codex 5.3",
+          "aliases": [
+            "codex-latest",
+            "codex",
+            "codex-5.3"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-fast",
+          "displayModelId": "gpt-5.3-codex-fast",
+          "displayName": "Codex 5.3 Fast",
+          "displayNameShort": "Codex 5.3 Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-high",
+          "displayModelId": "gpt-5.3-codex-high",
+          "displayName": "Codex 5.3 High",
+          "displayNameShort": "Codex 5.3 High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-high-fast",
+          "displayModelId": "gpt-5.3-codex-high-fast",
+          "displayName": "Codex 5.3 High Fast",
+          "displayNameShort": "Codex 5.3 High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-xhigh",
+          "displayModelId": "gpt-5.3-codex-xhigh",
+          "displayName": "Codex 5.3 Extra High",
+          "displayNameShort": "Codex 5.3 Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.3-codex-xhigh-fast",
+          "displayModelId": "gpt-5.3-codex-xhigh-fast",
+          "displayName": "Codex 5.3 Extra High Fast",
+          "displayNameShort": "Codex 5.3 Extra High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2",
+          "displayModelId": "gpt-5.2",
+          "displayName": "GPT-5.2",
+          "displayNameShort": "GPT-5.2",
+          "aliases": [
+            "gpt"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-low",
+          "displayModelId": "gpt-5.2-codex-low",
+          "displayName": "Codex 5.2 Low",
+          "displayNameShort": "Codex 5.2 Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-low-fast",
+          "displayModelId": "gpt-5.2-codex-low-fast",
+          "displayName": "Codex 5.2 Low Fast",
+          "displayNameShort": "Codex 5.2 Low Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex",
+          "displayModelId": "gpt-5.2-codex",
+          "displayName": "Codex 5.2",
+          "displayNameShort": "Codex 5.2",
+          "aliases": [
+            "codex",
+            "codex-5.2"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-fast",
+          "displayModelId": "gpt-5.2-codex-fast",
+          "displayName": "Codex 5.2 Fast",
+          "displayNameShort": "Codex 5.2 Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-high",
+          "displayModelId": "gpt-5.2-codex-high",
+          "displayName": "Codex 5.2 High",
+          "displayNameShort": "Codex 5.2 High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-high-fast",
+          "displayModelId": "gpt-5.2-codex-high-fast",
+          "displayName": "Codex 5.2 High Fast",
+          "displayNameShort": "Codex 5.2 High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-xhigh",
+          "displayModelId": "gpt-5.2-codex-xhigh",
+          "displayName": "Codex 5.2 Extra High",
+          "displayNameShort": "Codex 5.2 Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-codex-xhigh-fast",
+          "displayModelId": "gpt-5.2-codex-xhigh-fast",
+          "displayName": "Codex 5.2 Extra High Fast",
+          "displayNameShort": "Codex 5.2 Extra High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-low",
+          "displayModelId": "gpt-5.1-codex-max-low",
+          "displayName": "Codex 5.1 Max Low",
+          "displayNameShort": "Codex 5.1 Max Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-low-fast",
+          "displayModelId": "gpt-5.1-codex-max-low-fast",
+          "displayName": "Codex 5.1 Max Low Fast",
+          "displayNameShort": "Codex 5.1 Max Low Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-medium",
+          "displayModelId": "gpt-5.1-codex-max-medium",
+          "displayName": "Codex 5.1 Max",
+          "displayNameShort": "Codex 5.1 Max",
+          "aliases": [
+            "codex",
+            "codex-5.1-max"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-medium-fast",
+          "displayModelId": "gpt-5.1-codex-max-medium-fast",
+          "displayName": "Codex 5.1 Max Medium Fast",
+          "displayNameShort": "Codex 5.1 Max Medium Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-high",
+          "displayModelId": "gpt-5.1-codex-max-high",
+          "displayName": "Codex 5.1 Max High",
+          "displayNameShort": "Codex 5.1 Max High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-high-fast",
+          "displayModelId": "gpt-5.1-codex-max-high-fast",
+          "displayName": "Codex 5.1 Max High Fast",
+          "displayNameShort": "Codex 5.1 Max High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-xhigh",
+          "displayModelId": "gpt-5.1-codex-max-xhigh",
+          "displayName": "Codex 5.1 Max Extra High",
+          "displayNameShort": "Codex 5.1 Max Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-max-xhigh-fast",
+          "displayModelId": "gpt-5.1-codex-max-xhigh-fast",
+          "displayName": "Codex 5.1 Max Extra High Fast",
+          "displayNameShort": "Codex 5.1 Max Extra High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "composer-2.5",
+          "displayModelId": "composer-2.5",
+          "displayName": "Composer 2.5",
+          "displayNameShort": "Composer 2.5",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-high",
+          "displayModelId": "claude-opus-4-8-thinking-high",
+          "displayName": "Opus 4.8 1M Thinking",
+          "displayNameShort": "Opus 4.8 1M Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-high-fast",
+          "displayModelId": "claude-opus-4-8-thinking-high-fast",
+          "displayName": "Opus 4.8 1M Thinking Fast",
+          "displayNameShort": "Opus 4.8 1M Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "gpt-5.5-high",
+          "displayModelId": "gpt-5.5-high",
+          "displayName": "GPT-5.5 1M High",
+          "displayNameShort": "GPT-5.5 1M High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-high-fast",
+          "displayModelId": "gpt-5.5-high-fast",
+          "displayName": "GPT-5.5 High Fast",
+          "displayNameShort": "GPT-5.5 High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-high",
+          "displayModelId": "claude-opus-4-7-thinking-high",
+          "displayName": "Opus 4.7 1M High Thinking",
+          "displayNameShort": "Opus 4.7 1M High Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-high-fast",
+          "displayModelId": "claude-opus-4-7-thinking-high-fast",
+          "displayName": "Opus 4.7 1M High Thinking Fast",
+          "displayNameShort": "Opus 4.7 1M High Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "gpt-5.4-high",
+          "displayModelId": "gpt-5.4-high",
+          "displayName": "GPT-5.4 1M High",
+          "displayNameShort": "GPT-5.4 1M High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-high-fast",
+          "displayModelId": "gpt-5.4-high-fast",
+          "displayName": "GPT-5.4 High Fast",
+          "displayNameShort": "GPT-5.4 High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-opus-high-thinking",
+          "displayModelId": "claude-4.6-opus-high-thinking",
+          "displayName": "Opus 4.6 1M Thinking",
+          "displayNameShort": "Opus 4.6 1M Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "composer-2.5-fast",
+          "displayModelId": "composer-2.5-fast",
+          "displayName": "Composer 2.5 Fast",
+          "displayNameShort": "Composer 2.5 Fast",
+          "aliases": [
+            "composer-latest",
+            "composer",
+            "composer-2-5"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-low",
+          "displayModelId": "claude-opus-4-8-low",
+          "displayName": "Opus 4.8 1M Low",
+          "displayNameShort": "Opus 4.8 1M Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-low-fast",
+          "displayModelId": "claude-opus-4-8-low-fast",
+          "displayName": "Opus 4.8 1M Low Fast",
+          "displayNameShort": "Opus 4.8 1M Low Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-medium",
+          "displayModelId": "claude-opus-4-8-medium",
+          "displayName": "Opus 4.8 1M Medium",
+          "displayNameShort": "Opus 4.8 1M Medium",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-medium-fast",
+          "displayModelId": "claude-opus-4-8-medium-fast",
+          "displayName": "Opus 4.8 1M Medium Fast",
+          "displayNameShort": "Opus 4.8 1M Medium Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-high",
+          "displayModelId": "claude-opus-4-8-high",
+          "displayName": "Opus 4.8 1M",
+          "displayNameShort": "Opus 4.8 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-high-fast",
+          "displayModelId": "claude-opus-4-8-high-fast",
+          "displayName": "Opus 4.8 1M Fast",
+          "displayNameShort": "Opus 4.8 1M Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-xhigh",
+          "displayModelId": "claude-opus-4-8-xhigh",
+          "displayName": "Opus 4.8 1M Extra High",
+          "displayNameShort": "Opus 4.8 1M Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-xhigh-fast",
+          "displayModelId": "claude-opus-4-8-xhigh-fast",
+          "displayName": "Opus 4.8 1M Extra High Fast",
+          "displayNameShort": "Opus 4.8 1M Extra High Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-max",
+          "displayModelId": "claude-opus-4-8-max",
+          "displayName": "Opus 4.8 1M Max",
+          "displayNameShort": "Opus 4.8 1M Max",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-max-fast",
+          "displayModelId": "claude-opus-4-8-max-fast",
+          "displayName": "Opus 4.8 1M Max Fast",
+          "displayNameShort": "Opus 4.8 1M Max Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-low",
+          "displayModelId": "claude-opus-4-8-thinking-low",
+          "displayName": "Opus 4.8 1M Low Thinking",
+          "displayNameShort": "Opus 4.8 1M Low Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-low-fast",
+          "displayModelId": "claude-opus-4-8-thinking-low-fast",
+          "displayName": "Opus 4.8 1M Low Thinking Fast",
+          "displayNameShort": "Opus 4.8 1M Low Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-medium",
+          "displayModelId": "claude-opus-4-8-thinking-medium",
+          "displayName": "Opus 4.8 1M Medium Thinking",
+          "displayNameShort": "Opus 4.8 1M Medium Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-medium-fast",
+          "displayModelId": "claude-opus-4-8-thinking-medium-fast",
+          "displayName": "Opus 4.8 1M Medium Thinking Fast",
+          "displayNameShort": "Opus 4.8 1M Medium Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-xhigh",
+          "displayModelId": "claude-opus-4-8-thinking-xhigh",
+          "displayName": "Opus 4.8 1M Extra High Thinking",
+          "displayNameShort": "Opus 4.8 1M Extra High Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-xhigh-fast",
+          "displayModelId": "claude-opus-4-8-thinking-xhigh-fast",
+          "displayName": "Opus 4.8 1M Extra High Thinking Fast",
+          "displayNameShort": "Opus 4.8 1M Extra High Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-max",
+          "displayModelId": "claude-opus-4-8-thinking-max",
+          "displayName": "Opus 4.8 1M Max Thinking",
+          "displayNameShort": "Opus 4.8 1M Max Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-8-thinking-max-fast",
+          "displayModelId": "claude-opus-4-8-thinking-max-fast",
+          "displayName": "Opus 4.8 1M Max Thinking Fast",
+          "displayNameShort": "Opus 4.8 1M Max Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "gpt-5.5-none",
+          "displayModelId": "gpt-5.5-none",
+          "displayName": "GPT-5.5 1M None",
+          "displayNameShort": "GPT-5.5 1M None",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-none-fast",
+          "displayModelId": "gpt-5.5-none-fast",
+          "displayName": "GPT-5.5 None Fast",
+          "displayNameShort": "GPT-5.5 None Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-low",
+          "displayModelId": "gpt-5.5-low",
+          "displayName": "GPT-5.5 1M Low",
+          "displayNameShort": "GPT-5.5 1M Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-low-fast",
+          "displayModelId": "gpt-5.5-low-fast",
+          "displayName": "GPT-5.5 Low Fast",
+          "displayNameShort": "GPT-5.5 Low Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-medium",
+          "displayModelId": "gpt-5.5-medium",
+          "displayName": "GPT-5.5 1M",
+          "displayNameShort": "GPT-5.5 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-medium-fast",
+          "displayModelId": "gpt-5.5-medium-fast",
+          "displayName": "GPT-5.5 Fast",
+          "displayNameShort": "GPT-5.5 Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-extra-high",
+          "displayModelId": "gpt-5.5-extra-high",
+          "displayName": "GPT-5.5 1M Extra High",
+          "displayNameShort": "GPT-5.5 1M Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.5-extra-high-fast",
+          "displayModelId": "gpt-5.5-extra-high-fast",
+          "displayName": "GPT-5.5 Extra High Fast",
+          "displayNameShort": "GPT-5.5 Extra High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-sonnet-medium",
+          "displayModelId": "claude-4.6-sonnet-medium",
+          "displayName": "Sonnet 4.6 1M",
+          "displayNameShort": "Sonnet 4.6 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-sonnet-medium-thinking",
+          "displayModelId": "claude-4.6-sonnet-medium-thinking",
+          "displayName": "Sonnet 4.6 1M Thinking",
+          "displayNameShort": "Sonnet 4.6 1M Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-low",
+          "displayModelId": "claude-opus-4-7-low",
+          "displayName": "Opus 4.7 1M Low",
+          "displayNameShort": "Opus 4.7 1M Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-low-fast",
+          "displayModelId": "claude-opus-4-7-low-fast",
+          "displayName": "Opus 4.7 1M Low Fast",
+          "displayNameShort": "Opus 4.7 1M Low Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-medium",
+          "displayModelId": "claude-opus-4-7-medium",
+          "displayName": "Opus 4.7 1M Medium",
+          "displayNameShort": "Opus 4.7 1M Medium",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-medium-fast",
+          "displayModelId": "claude-opus-4-7-medium-fast",
+          "displayName": "Opus 4.7 1M Medium Fast",
+          "displayNameShort": "Opus 4.7 1M Medium Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-high",
+          "displayModelId": "claude-opus-4-7-high",
+          "displayName": "Opus 4.7 1M High",
+          "displayNameShort": "Opus 4.7 1M High",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-high-fast",
+          "displayModelId": "claude-opus-4-7-high-fast",
+          "displayName": "Opus 4.7 1M High Fast",
+          "displayNameShort": "Opus 4.7 1M High Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-xhigh",
+          "displayModelId": "claude-opus-4-7-xhigh",
+          "displayName": "Opus 4.7 1M",
+          "displayNameShort": "Opus 4.7 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-xhigh-fast",
+          "displayModelId": "claude-opus-4-7-xhigh-fast",
+          "displayName": "Opus 4.7 1M Fast",
+          "displayNameShort": "Opus 4.7 1M Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-max",
+          "displayModelId": "claude-opus-4-7-max",
+          "displayName": "Opus 4.7 1M Max",
+          "displayNameShort": "Opus 4.7 1M Max",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-max-fast",
+          "displayModelId": "claude-opus-4-7-max-fast",
+          "displayName": "Opus 4.7 1M Max Fast",
+          "displayNameShort": "Opus 4.7 1M Max Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-low",
+          "displayModelId": "claude-opus-4-7-thinking-low",
+          "displayName": "Opus 4.7 1M Low Thinking",
+          "displayNameShort": "Opus 4.7 1M Low Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-low-fast",
+          "displayModelId": "claude-opus-4-7-thinking-low-fast",
+          "displayName": "Opus 4.7 1M Low Thinking Fast",
+          "displayNameShort": "Opus 4.7 1M Low Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-medium",
+          "displayModelId": "claude-opus-4-7-thinking-medium",
+          "displayName": "Opus 4.7 1M Medium Thinking",
+          "displayNameShort": "Opus 4.7 1M Medium Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-medium-fast",
+          "displayModelId": "claude-opus-4-7-thinking-medium-fast",
+          "displayName": "Opus 4.7 1M Medium Thinking Fast",
+          "displayNameShort": "Opus 4.7 1M Medium Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-xhigh",
+          "displayModelId": "claude-opus-4-7-thinking-xhigh",
+          "displayName": "Opus 4.7 1M Thinking",
+          "displayNameShort": "Opus 4.7 1M Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-xhigh-fast",
+          "displayModelId": "claude-opus-4-7-thinking-xhigh-fast",
+          "displayName": "Opus 4.7 1M Thinking Fast",
+          "displayNameShort": "Opus 4.7 1M Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-max",
+          "displayModelId": "claude-opus-4-7-thinking-max",
+          "displayName": "Opus 4.7 1M Max Thinking",
+          "displayNameShort": "Opus 4.7 1M Max Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-opus-4-7-thinking-max-fast",
+          "displayModelId": "claude-opus-4-7-thinking-max-fast",
+          "displayName": "Opus 4.7 1M Max Thinking Fast",
+          "displayNameShort": "Opus 4.7 1M Max Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "grok-build-0.1",
+          "displayModelId": "grok-build-0.1",
+          "displayName": "Grok Build 0.1 1M",
+          "displayNameShort": "Grok Build 0.1 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-low",
+          "displayModelId": "gpt-5.4-low",
+          "displayName": "GPT-5.4 1M Low",
+          "displayNameShort": "GPT-5.4 1M Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-medium",
+          "displayModelId": "gpt-5.4-medium",
+          "displayName": "GPT-5.4 1M",
+          "displayNameShort": "GPT-5.4 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-medium-fast",
+          "displayModelId": "gpt-5.4-medium-fast",
+          "displayName": "GPT-5.4 Fast",
+          "displayNameShort": "GPT-5.4 Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-xhigh",
+          "displayModelId": "gpt-5.4-xhigh",
+          "displayName": "GPT-5.4 1M Extra High",
+          "displayNameShort": "GPT-5.4 1M Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-xhigh-fast",
+          "displayModelId": "gpt-5.4-xhigh-fast",
+          "displayName": "GPT-5.4 Extra High Fast",
+          "displayNameShort": "GPT-5.4 Extra High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-opus-high",
+          "displayModelId": "claude-4.6-opus-high",
+          "displayName": "Opus 4.6 1M",
+          "displayNameShort": "Opus 4.6 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-opus-max",
+          "displayModelId": "claude-4.6-opus-max",
+          "displayName": "Opus 4.6 1M Max",
+          "displayNameShort": "Opus 4.6 1M Max",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-opus-high-thinking-fast",
+          "displayModelId": "claude-4.6-opus-high-thinking-fast",
+          "displayName": "Opus 4.6 1M Thinking Fast",
+          "displayNameShort": "Opus 4.6 1M Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-4.6-opus-max-thinking",
+          "displayModelId": "claude-4.6-opus-max-thinking",
+          "displayName": "Opus 4.6 1M Max Thinking",
+          "displayNameShort": "Opus 4.6 1M Max Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.6-opus-max-thinking-fast",
+          "displayModelId": "claude-4.6-opus-max-thinking-fast",
+          "displayName": "Opus 4.6 1M Max Thinking Fast",
+          "displayNameShort": "Opus 4.6 1M Max Thinking Fast",
+          "maxMode": true
+        },
+        {
+          "modelId": "claude-4.5-opus-high",
+          "displayModelId": "claude-4.5-opus-high",
+          "displayName": "Opus 4.5",
+          "displayNameShort": "Opus 4.5",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.5-opus-high-thinking",
+          "displayModelId": "claude-4.5-opus-high-thinking",
+          "displayName": "Opus 4.5 Thinking",
+          "displayNameShort": "Opus 4.5 Thinking",
+          "aliases": [
+            "opus",
+            "opus-4.5",
+            "opus-4-5"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-low",
+          "displayModelId": "gpt-5.2-low",
+          "displayName": "GPT-5.2 Low",
+          "displayNameShort": "GPT-5.2 Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-low-fast",
+          "displayModelId": "gpt-5.2-low-fast",
+          "displayName": "GPT-5.2 Low Fast",
+          "displayNameShort": "GPT-5.2 Low Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-fast",
+          "displayModelId": "gpt-5.2-fast",
+          "displayName": "GPT-5.2 Fast",
+          "displayNameShort": "GPT-5.2 Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-high",
+          "displayModelId": "gpt-5.2-high",
+          "displayName": "GPT-5.2 High",
+          "displayNameShort": "GPT-5.2 High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-high-fast",
+          "displayModelId": "gpt-5.2-high-fast",
+          "displayName": "GPT-5.2 High Fast",
+          "displayNameShort": "GPT-5.2 High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-xhigh",
+          "displayModelId": "gpt-5.2-xhigh",
+          "displayName": "GPT-5.2 Extra High",
+          "displayNameShort": "GPT-5.2 Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.2-xhigh-fast",
+          "displayModelId": "gpt-5.2-xhigh-fast",
+          "displayName": "GPT-5.2 Extra High Fast",
+          "displayNameShort": "GPT-5.2 Extra High Fast",
+          "maxMode": false
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "displayModelId": "gemini-3.1-pro",
+          "displayName": "Gemini 3.1 Pro",
+          "displayNameShort": "Gemini 3.1 Pro",
+          "aliases": [
+            "gemini-latest",
+            "gemini-pro-latest",
+            "gemini",
+            "gemini-pro"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-mini-none",
+          "displayModelId": "gpt-5.4-mini-none",
+          "displayName": "GPT-5.4 Mini None",
+          "displayNameShort": "GPT-5.4 Mini None",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-mini-low",
+          "displayModelId": "gpt-5.4-mini-low",
+          "displayName": "GPT-5.4 Mini Low",
+          "displayNameShort": "GPT-5.4 Mini Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-mini-medium",
+          "displayModelId": "gpt-5.4-mini-medium",
+          "displayName": "GPT-5.4 Mini",
+          "displayNameShort": "GPT-5.4 Mini",
+          "aliases": [
+            "gpt-mini-latest",
+            "gpt-mini"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-mini-high",
+          "displayModelId": "gpt-5.4-mini-high",
+          "displayName": "GPT-5.4 Mini High",
+          "displayNameShort": "GPT-5.4 Mini High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-mini-xhigh",
+          "displayModelId": "gpt-5.4-mini-xhigh",
+          "displayName": "GPT-5.4 Mini Extra High",
+          "displayNameShort": "GPT-5.4 Mini Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-nano-none",
+          "displayModelId": "gpt-5.4-nano-none",
+          "displayName": "GPT-5.4 Nano None",
+          "displayNameShort": "GPT-5.4 Nano None",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-nano-low",
+          "displayModelId": "gpt-5.4-nano-low",
+          "displayName": "GPT-5.4 Nano Low",
+          "displayNameShort": "GPT-5.4 Nano Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-nano-medium",
+          "displayModelId": "gpt-5.4-nano-medium",
+          "displayName": "GPT-5.4 Nano",
+          "displayNameShort": "GPT-5.4 Nano",
+          "aliases": [
+            "gpt-nano-latest",
+            "gpt-nano"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-nano-high",
+          "displayModelId": "gpt-5.4-nano-high",
+          "displayName": "GPT-5.4 Nano High",
+          "displayNameShort": "GPT-5.4 Nano High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.4-nano-xhigh",
+          "displayModelId": "gpt-5.4-nano-xhigh",
+          "displayName": "GPT-5.4 Nano Extra High",
+          "displayNameShort": "GPT-5.4 Nano Extra High",
+          "maxMode": false
+        },
+        {
+          "modelId": "grok-4.3",
+          "displayModelId": "grok-4.3",
+          "displayName": "Grok 4.3 1M",
+          "displayNameShort": "Grok 4.3 1M",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.5-sonnet",
+          "displayModelId": "claude-4.5-sonnet",
+          "displayName": "Sonnet 4.5",
+          "displayNameShort": "Sonnet 4.5",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4.5-sonnet-thinking",
+          "displayModelId": "claude-4.5-sonnet-thinking",
+          "displayName": "Sonnet 4.5 Thinking",
+          "displayNameShort": "Sonnet 4.5 Thinking",
+          "aliases": [
+            "sonnet",
+            "sonnet-4.5",
+            "sonnet-4-5"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-low",
+          "displayModelId": "gpt-5.1-low",
+          "displayName": "GPT-5.1 Low",
+          "displayNameShort": "GPT-5.1 Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1",
+          "displayModelId": "gpt-5.1",
+          "displayName": "GPT-5.1",
+          "displayNameShort": "GPT-5.1",
+          "aliases": [
+            "gpt"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-high",
+          "displayModelId": "gpt-5.1-high",
+          "displayName": "GPT-5.1 High",
+          "displayNameShort": "GPT-5.1 High",
+          "maxMode": false
+        },
+        {
+          "modelId": "gemini-3-flash",
+          "displayModelId": "gemini-3-flash",
+          "displayName": "Gemini 3 Flash",
+          "displayNameShort": "Gemini 3 Flash",
+          "maxMode": false
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "displayModelId": "gemini-3.5-flash",
+          "displayName": "Gemini 3.5 Flash",
+          "displayNameShort": "Gemini 3.5 Flash",
+          "aliases": [
+            "gemini-flash-latest",
+            "gemini-flash"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-mini-low",
+          "displayModelId": "gpt-5.1-codex-mini-low",
+          "displayName": "Codex 5.1 Mini Low",
+          "displayNameShort": "Codex 5.1 Mini Low",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-mini",
+          "displayModelId": "gpt-5.1-codex-mini",
+          "displayName": "Codex 5.1 Mini",
+          "displayNameShort": "Codex 5.1 Mini",
+          "aliases": [
+            "codex-mini-latest",
+            "codex-mini"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5.1-codex-mini-high",
+          "displayModelId": "gpt-5.1-codex-mini-high",
+          "displayName": "Codex 5.1 Mini High",
+          "displayNameShort": "Codex 5.1 Mini High",
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4-sonnet",
+          "displayModelId": "claude-4-sonnet",
+          "displayName": "Sonnet 4",
+          "displayNameShort": "Sonnet 4",
+          "aliases": [
+            "sonnet",
+            "sonnet-4"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "claude-4-sonnet-thinking",
+          "displayModelId": "claude-4-sonnet-thinking",
+          "displayName": "Sonnet 4 Thinking",
+          "displayNameShort": "Sonnet 4 Thinking",
+          "maxMode": false
+        },
+        {
+          "modelId": "gpt-5-mini",
+          "displayModelId": "gpt-5-mini",
+          "displayName": "GPT-5 Mini",
+          "displayNameShort": "GPT-5 Mini",
+          "aliases": [
+            "gpt-mini"
+          ],
+          "maxMode": false
+        },
+        {
+          "modelId": "kimi-k2.5",
+          "displayModelId": "kimi-k2.5",
+          "displayName": "Kimi K2.5",
+          "displayNameShort": "Kimi K2.5",
+          "aliases": [
+            "kimi-latest",
+            "kimi"
+          ],
+          "maxMode": false
+        }
+      ]
+    },
+    "GetDefaultModelForCli": {
+      "error": "\u0000\u0000\u0006\u0004\u0000\u0000\u0000\u0000\u0000\u0000\u0004\u0000\b\u0000\u0000\u0000\u0000\u0004\b\u0000\u0000\u0000\u0000\u0000\u007f\u00ff\u0000\u0000\u0000\u0000\b\u0007\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0002"
+    },
+    "NameAgent": {
+      "error": "\u0000\u0000\u0006\u0004\u0000\u0000\u0000\u0000\u0000\u0000\u0004\u0000\b\u0000\u0000\u0000\u0000\u0004\b\u0000\u0000\u0000\u0000\u0000\u007f\u00ff\u0000\u0000\u0000\u0000\b\u0007\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0002"
+    }
+  },
+  "appendix_get_server_config_redacted": {
+    "bugConfigResponse": {
+      "bugBotV1": {
+        "backgroundCallFrequencyMs": 3600000
+      }
+    },
+    "indexingConfig": {
+      "maxConcurrentUploads": 64,
+      "absoluteMaxNumberFiles": 100000,
+      "maxFileRetries": 30,
+      "syncConcurrency": 20,
+      "autoIndexingMaxNumFiles": 50000,
+      "indexingPeriodSeconds": 490,
+      "incremental": true,
+      "defaultUserPathEncryptionKey": "[REDACTED]",
+      "multiRootIndexingEnabled": true,
+      "copyStatusCheckPeriodSeconds": 1,
+      "copyTimeoutSeconds": 3600,
+      "maxBatchBytes": 2097152,
+      "maxBatchNumRequests": 20,
+      "maxSyncMerkleBatchSize": 50
+    },
+    "clientTracingConfig": {
+      "globalSampleRate": 1,
+      "tracesSampleRate": 0.0001,
+      "loggerSampleRate": 0.1,
+      "minidumpSampleRate": 1,
+      "errorRateLimit": 10,
+      "performanceUnitRateLimit": 100,
+      "profilesSampleRate": 0.001,
+      "jsonStringifySampleRate": 1e-05
+    },
+    "chatConfig": {
+      "fullContextTokenLimit": 30000,
+      "maxRuleLength": 100000,
+      "maxMcpTools": 100,
+      "warnMcpTools": 80,
+      "summarizationMessage": "Chat context summarized.",
+      "numFilesForMemoryGeneration": 999999,
+      "numSummarizationsBeforeWarningShown": 10,
+      "cursorRulesReadFileFixEnabled": true,
+      "dontSendCtrlCBeforeCommand": true,
+      "clientStatsigPollIntervalMs": 300000,
+      "listDirV2PredefinedIgnoreGlobs": [
+        "**/node_modules/*",
+        "**/__pycache__/*",
+        "**/.*"
+      ]
+    },
+    "configVersion": "063f73a7-c7a3-4ec9-bd61-f4680e30189d",
+    "profilingConfig": {},
+    "metricsConfig": {
+      "enabledInPrivacyMode": true,
+      "enabledInNonPrivacyMode": true
+    },
+    "backgroundComposerConfig": {
+      "showBackgroundAgentInBetaSettings": true,
+      "windowInWindowPreloadCount": 8,
+      "windowInWindowPingIntervalMs": 10000,
+      "showBackgroundAgentDisclaimer": true,
+      "showBackgroundAgentSlackAd": false,
+      "showBackgroundAgentHistoryAction": true,
+      "maxWindowInWindows": 10
+    },
+    "memoryMonitorConfig": {
+      "baseThresholdMb": 1536,
+      "criticalOffsetMb": 512,
+      "processMemoryIntervalSec": 0
+    },
+    "folderSizeLimit": {
+      "maxTotalBytes": 5000000,
+      "maxNumFiles": 250
+    },
+    "gitIndexingConfig": {
+      "enabled": false
+    },
+    "currentInAppAd": {
+      "id": "cloud_agent_mau_automations_ad",
+      "content": {
+        "tag": "Cursor Automations",
+        "title": "Build a Bug-Finding Agent",
+        "sections": [
+          {
+            "iconSvg": "M7 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM10 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm6 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-3 7a4 4 0 0 0-4 4c0 2 2 3 4 3s4-1 4-3a4 4 0 0 0-4-4Z",
+            "title": "Automatically find bugs",
+            "description": "Cursor will automatically kick off a cloud agent for every new git commit to identify critical bugs before they hit production."
+          },
+          {
+            "iconSvg": "bell",
+            "title": "Get back safe fixes",
+            "description": "Always-on agents work silently in the background, share summary analyses in Slack, and produce PRs for safe fixes."
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "text": "Learn More",
+          "buttonType": "BUTTON_TYPE_LEADING",
+          "externalUrl": "https://cursor.com/docs/cloud-agent/automations"
+        },
+        {
+          "text": "Later",
+          "buttonType": "BUTTON_TYPE_SECONDARY"
+        },
+        {
+          "text": "Create Automation",
+          "buttonType": "BUTTON_TYPE_PRIMARY",
+          "externalUrl": "https://cursor.com/marketplace/automations/find-bugs"
+        }
+      ],
+      "analyticsVariant": "github",
+      "targetSurfaces": [
+        "CLIENT_SURFACE_EDITOR"
+      ]
+    },
+    "traceConfig": {
+      "bufferSize": 5000,
+      "flushIntervalMs": 60000,
+      "sampleRate": 0.1
+    },
+    "runTerminalServerConfig": {
+      "compositeShellCommands": [
+        "ansible",
+        "apt",
+        "az",
+        "aws",
+        "aws-vault",
+        "brew",
+        "buildah",
+        "cargo",
+        "cf",
+        "chef",
+        "circleci",
+        "composer",
+        "conda",
+        "consul",
+        "docker",
+        "docker-compose",
+        "doctl",
+        "eksctl",
+        "firebase",
+        "flyctl",
+        "gem",
+        "gh",
+        "git",
+        "gcloud",
+        "glab",
+        "helm",
+        "heroku",
+        "ibmcloud",
+        "ip",
+        "kops",
+        "kubectl",
+        "kustomize",
+        "linode-cli",
+        "mercurial",
+        "nerdctl",
+        "nomad",
+        "npm",
+        "oci",
+        "op",
+        "pacman",
+        "packer",
+        "pip",
+        "pipenv",
+        "pipx",
+        "pnpm",
+        "podman",
+        "pulumi",
+        "systemctl",
+        "terraform",
+        "uv",
+        "vault",
+        "yarn"
+      ]
+    },
+    "onlineMetricsConfig": {
+      "enabled": true,
+      "maxRequestsTracked": 1000,
+      "maxRequestsTrackedMb": 100,
+      "maxRequestRetentionSeconds": 604800,
+      "numCommitsTracked": 3,
+      "timeIntervalsTrackedMinutes": [
+        5,
+        15,
+        60
+      ],
+      "tooBigFileSizeBytes": 1000000
+    },
+    "interactionConfig": {
+      "metricsEnabled": true,
+      "profilingIntervalSec": 30,
+      "metricsIntervalSec": 120,
+      "profilingMaxBufferSize": 10000,
+      "profilingInteractionDurationThresholdMs": 100,
+      "profilingSampleIntervalMs": 5,
+      "metricsMinInteractionsForLoaf": 10,
+      "metricsMinForegroundTimeMs": 7000,
+      "metricsCombinedInpDropHighestCount": 35,
+      "metricsClickInpDropHighestCount": 15,
+      "metricsKeypressInpDropHighestCount": 30,
+      "metricsStartupThresholdSec": 15
+    },
+    "agentTelemetryConfig": {
+      "enabled": true
+    },
+    "clientVersionStatus": {
+      "updateLevel": "CLIENT_UPDATE_LEVEL_REQUIRED",
+      "currentClientVersion": "unknown",
+      "minSupportedClientVersion": "3.0.0",
+      "minAllowedClientVersion": "2.6.0",
+      "message": "This version of Cursor is no longer supported. Please update to continue."
+    },
+    "agentLayoutPolicy": {
+      "allowedActionIds": [
+        "workbench.action.agentLayout",
+        "workbench.action.editorLayout",
+        "workbench.action.toggleFullScreen",
+        "workbench.action.reloadWindow",
+        "workbench.action.closeWindow",
+        "workbench.action.quit",
+        "workbench.action.toggleDevTools",
+        "workbench.action.toggleSidebarVisibility",
+        "workbench.action.togglePanel",
+        "workbench.action.toggleAuxiliaryBar",
+        "workbench.action.zoomIn",
+        "workbench.action.zoomOut",
+        "workbench.action.terminal.toggleTerminal",
+        "typescript.restartTsServer",
+        "typescript.reloadProjects",
+        "javascript.reloadProjects",
+        "typescript.selectTypeScriptVersion",
+        "typescript.openTsServerLog",
+        "typescript.goToProjectConfig",
+        "javascript.goToProjectConfig",
+        "cursorpyright.restartserver",
+        "workbench.action.openWebviewDeveloperTools",
+        "workbench.action.restartExtensionHost",
+        "workbench.extensions.action.installExtensions",
+        "workbench.extensions.action.reloadExtension",
+        "workbench.action.files.openFile",
+        "workbench.action.files.openFolder",
+        "workbench.action.files.openFolderViaWorkspace",
+        "workbench.action.files.openFileFolder",
+        "workbench.action.quickOpen",
+        "workbench.action.files.save",
+        "workbench.action.files.saveAs",
+        "workbench.action.files.saveAll",
+        "workbench.action.files.revert",
+        "workbench.action.files.copyPathOfActiveFile",
+        "workbench.action.files.setActiveEditorReadonlyInSession",
+        "workbench.action.files.setActiveEditorWriteableInSession",
+        "workbench.action.files.toggleActiveEditorReadonlyInSession",
+        "workbench.action.files.resetActiveEditorReadonlyInSession",
+        "revealFileInOS",
+        "copyFilePath",
+        "copyRelativeFilePath",
+        "workbench.action.quickOpenNavigateNext",
+        "workbench.action.quickOpenNavigatePrevious",
+        "workbench.action.quickOpenSelectNext",
+        "workbench.action.quickOpenSelectPrevious",
+        "workbench.action.quickOpenNavigateNextInFilePicker",
+        "workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "workbench.action.quickOpenPreviousRecentlyUsedEditor",
+        "workbench.action.quickOpenLeastRecentlyUsedEditor",
+        "workbench.action.acceptSelectedQuickOpenItem",
+        "workbench.action.alternativeAcceptSelectedQuickOpenItem",
+        "workbench.action.focusQuickOpen",
+        "workbench.action.quickInputBack",
+        "list.focusDown",
+        "list.focusUp",
+        "list.focusAnyDown",
+        "list.focusAnyUp",
+        "list.focusPageDown",
+        "list.focusPageUp",
+        "list.focusFirst",
+        "list.focusLast",
+        "list.focusAnyFirst",
+        "list.focusAnyLast",
+        "list.select",
+        "list.selectAndPreserveFocus",
+        "list.selectAll",
+        "list.toggleSelection",
+        "list.toggleExpand",
+        "list.expand",
+        "list.collapse",
+        "list.expandSelectionDown",
+        "list.expandSelectionUp",
+        "workbench.action.showCommands",
+        "workbench.action.clearCommandHistory",
+        "workbench.action.openRecent",
+        "workbench.action.quickOpenView",
+        "workbench.action.gotoLine",
+        "workbench.action.gotoSymbol",
+        "workbench.action.showAllSymbols",
+        "workbench.action.openNextRecentlyUsedEditor",
+        "workbench.action.openPreviousRecentlyUsedEditor",
+        "workbench.action.openNextRecentlyUsedEditorInGroup",
+        "workbench.action.openPreviousRecentlyUsedEditorInGroup",
+        "workbench.action.editor.changeLanguageMode",
+        "workbench.action.editor.changeEncoding",
+        "workbench.action.editor.changeEOL",
+        "workbench.action.editor.previousChange",
+        "workbench.action.editor.nextChange",
+        "workbench.action.editorDictation.start",
+        "workbench.action.editorDictation.stop",
+        "workbench.action.openAgentsView",
+        "workbench.action.moveEditorLeftInGroup",
+        "workbench.action.moveEditorRightInGroup",
+        "closeReferenceSearch",
+        "closeReferenceSearchEditor",
+        "togglePeekWidgetFocus",
+        "editor.action.peekLocations",
+        "workbench.action.navigateBack",
+        "workbench.action.navigateForward",
+        "workbench.action.navigateToLastEditLocation",
+        "workbench.action.navigatePreviousInEditHistory",
+        "workbench.action.navigateForwardInEditHistory",
+        "workbench.action.navigatePreviousInNavigationHistory",
+        "workbench.action.navigateForwardInNavigationHistory",
+        "workbench.action.navigateToLastNavigationLocation",
+        "workbench.action.reopenClosedEditor",
+        "workbench.action.nextEditor",
+        "workbench.action.previousEditor",
+        "search.action.openResult",
+        "search.action.openResultToSide",
+        "search.action.openInEditor",
+        "search.action.replaceAllInFile",
+        "closeReplaceInFilesWidget",
+        "workbench.action.openAgentSCMSearchTab",
+        "workbench.action.dismissNotification",
+        "workbench.action.closeSidebarViaNotification",
+        "tooltip.close.register",
+        "notifications.showList",
+        "notifications.hideList",
+        "notifications.toggleList",
+        "notifications.hideToasts",
+        "notifications.focusToasts",
+        "notifications.focusNextToast",
+        "notifications.focusPreviousToast",
+        "notifications.focusFirstToast",
+        "notifications.focusLastToast",
+        "notification.collapse",
+        "notification.expand",
+        "notification.acceptPrimaryAction",
+        "notification.toggle",
+        "notification.clear",
+        "notifications.clearAll",
+        "notifications.toggleDoNotDisturbMode",
+        "notifications.toggleDoNotDisturbModeBySource",
+        "workbench.action.markAgentWindow",
+        "composer.fixerrormessage",
+        "composer.addfilestocomposer",
+        "composer.addfilestonnewcomposer",
+        "composer.addsymbolstocomposer",
+        "composer.addsymbolstonewcomposer",
+        "aichat.newfollowupaction",
+        "composer.startComposerPrompt2",
+        "composer.startComposerPrompt",
+        "composer.openComposer",
+        "composer.cancelChat",
+        "composer.reapplyCodeblock",
+        "composer.resumeCurrentChat",
+        "composer.updateTitle",
+        "composer.updateStatus",
+        "workbench.action.backgroundComposer.refresh",
+        "aiSettings.action.openhidden",
+        "workbench.action.openMCPSettings",
+        "workbench.action.openAgentsView",
+        "workbench.action.openChat",
+        "workbench.action.openSettings",
+        "workbench.action.openGlobalKeybindings",
+        "workbench.action.showAboutDialog",
+        "cursor.doupdate",
+        "cursor.checkonupdate",
+        "update.checkForUpdate",
+        "update.downloadUpdate",
+        "update.installUpdate",
+        "update.restartToUpdate",
+        "editor.action.acceptCppSuggestion",
+        "editor.action.configureCppDiffPeekView",
+        "editor.action.setCppDiffPeekView",
+        "editor.cpp.disableenabled",
+        "editor.cpp.snooze",
+        "editor.cpp.unsnooze",
+        "editor.cpp.toggle",
+        "editor.cpp.openPro",
+        "editor.action.showDiffHistoryOverride",
+        "editor.action.clearOverriddenDiffHistory",
+        "editor.action.overrideDiffHistory",
+        "editor.action.revealDefinition",
+        "editor.action.revealDefinitionAside",
+        "editor.action.peekDefinition",
+        "editor.action.revealDeclaration",
+        "editor.action.peekDeclaration",
+        "editor.action.goToTypeDefinition",
+        "editor.action.peekTypeDefinition",
+        "editor.action.goToImplementation",
+        "editor.action.peekImplementation",
+        "editor.action.goToReferences",
+        "editor.action.referenceSearch.trigger",
+        "editor.action.showReferences",
+        "editor.action.peekReferences",
+        "editor.action.findReferences",
+        "editor.action.showDefinitionPreviewHover",
+        "editor.action.openDeclarationToTheSide",
+        "editor.action.previewDeclaration",
+        "editor.action.goToDeclaration",
+        "revealReference",
+        "openReference",
+        "editor.action.openLink",
+        "workbench.action.openLastCmdKPrompt",
+        "workbench.action.closeActiveEditorPromptBars",
+        "workbench.action.closeActiveEditor",
+        "acceptSelectedCodeAction",
+        "acceptSelectedAction",
+        "previewSelectedCodeAction",
+        "previewSelectedAction",
+        "selectNextCodeAction",
+        "selectPrevCodeAction",
+        "hideCodeActionWidget",
+        "editor.action.codeAction",
+        "editor.action.quickFix",
+        "editor.action.autoFix",
+        "editor.action.fixAll",
+        "editor.action.sourceAction",
+        "editor.action.refactor",
+        "editor.action.refactor.extract",
+        "editor.action.refactor.inline",
+        "editor.action.refactor.move",
+        "editor.action.refactor.rewrite",
+        "editor.action.organizeImports",
+        "actions.find",
+        "actions.findWithSelection",
+        "editor.actions.findWithArgs",
+        "type",
+        "default:type",
+        "compositionStart",
+        "compositionEnd",
+        "compositionType",
+        "replacePreviousChar",
+        "paste",
+        "cut",
+        "_moveTo",
+        "_moveToSelect",
+        "columnSelect",
+        "cursorColumnSelectLeft",
+        "cursorColumnSelectRight",
+        "cursorColumnSelectUp",
+        "cursorColumnSelectPageUp",
+        "cursorColumnSelectDown",
+        "cursorColumnSelectPageDown",
+        "cursorMove",
+        "cursorLeft",
+        "cursorLeftSelect",
+        "cursorRight",
+        "cursorRightSelect",
+        "cursorUp",
+        "cursorUpSelect",
+        "cursorPageUp",
+        "cursorPageUpSelect",
+        "cursorDown",
+        "cursorDownSelect",
+        "cursorPageDown",
+        "cursorPageDownSelect",
+        "createCursor",
+        "_lastCursorMoveToSelect",
+        "cursorHome",
+        "cursorHomeSelect",
+        "cursorLineStart",
+        "cursorLineStartSelect",
+        "cursorEnd",
+        "cursorEndSelect",
+        "cursorLineEnd",
+        "cursorLineEndSelect",
+        "cursorTop",
+        "cursorTopSelect",
+        "cursorBottom",
+        "cursorBottomSelect",
+        "cursorWordLeft",
+        "cursorWordRight",
+        "cursorWordLeftSelect",
+        "cursorWordRightSelect",
+        "cursorWordStartLeft",
+        "cursorWordEndRight",
+        "cursorWordStartLeftSelect",
+        "cursorWordEndRightSelect",
+        "editorScroll",
+        "scrollLineUp",
+        "scrollPageUp",
+        "scrollEditorTop",
+        "scrollLineDown",
+        "scrollPageDown",
+        "scrollEditorBottom",
+        "scrollLeft",
+        "scrollRight",
+        "_wordSelect",
+        "_wordSelectDrag",
+        "lastCursorWordSelect",
+        "_lineSelect",
+        "_lineSelectDrag",
+        "lastCursorLineSelect",
+        "lastCursorLineSelectDrag",
+        "cancelSelection",
+        "removeSecondaryCursors",
+        "selectAll",
+        "expandLineSelection",
+        "setSelection",
+        "lineBreakInsert",
+        "outdent",
+        "tab",
+        "deleteLeft",
+        "deleteRight",
+        "deleteWordLeft",
+        "deleteWordRight",
+        "deleteWordStartLeft",
+        "deleteWordEndRight",
+        "deleteAllLeft",
+        "deleteAllRight",
+        "deleteInsideWord",
+        "undo",
+        "redo",
+        "closeFindWidget",
+        "toggleFindCaseSensitive",
+        "toggleFindWholeWord",
+        "toggleFindRegex",
+        "toggleFindInSelection",
+        "togglePreserveCase",
+        "find",
+        "findNext",
+        "findPrevious",
+        "replace",
+        "replaceOne",
+        "replaceAll",
+        "revealLine",
+        "_setContext",
+        "_search.runRipgrepRaw",
+        "aiServerConfigService.getCachedServerConfig",
+        "workbench.action.terminal.attachToSession",
+        "workbench.action.terminal.detachSession",
+        "workbench.action.mcp.clearAllTokens",
+        "workbench.action.startInfiniteComposerSession",
+        "workbench.action.stopInfiniteComposerSession",
+        "aiServerConfigService.getCachedServerConfig",
+        "_testing.getExplorerSelection",
+        "aiSettings.action.open",
+        "mcp.deeplinkInstall"
+      ],
+      "deniedActionIds": [
+        "workbench.action.splitEditor",
+        "workbench.action.splitEditorOrthogonal",
+        "workbench.action.splitEditorLeft",
+        "workbench.action.splitEditorRight",
+        "workbench.action.splitEditorUp",
+        "workbench.action.splitEditorDown",
+        "workbench.action.splitEditorToPreviousGroup",
+        "workbench.action.splitEditorToNextGroup",
+        "workbench.action.splitEditorToAboveGroup",
+        "workbench.action.splitEditorToBelowGroup",
+        "workbench.action.splitEditorToLeftGroup",
+        "workbench.action.splitEditorToRightGroup",
+        "workbench.action.splitEditorToFirstGroup",
+        "workbench.action.splitEditorToLastGroup",
+        "workbench.action.duplicateActiveEditorGroupLeft",
+        "workbench.action.duplicateActiveEditorGroupRight",
+        "workbench.action.duplicateActiveEditorGroupUp",
+        "workbench.action.duplicateActiveEditorGroupDown",
+        "workbench.action.openEditorAtIndex",
+        "workbench.action.openEditorAtIndex1",
+        "workbench.action.openEditorAtIndex2",
+        "workbench.action.openEditorAtIndex3",
+        "workbench.action.openEditorAtIndex4",
+        "workbench.action.openEditorAtIndex5",
+        "workbench.action.openEditorAtIndex6",
+        "workbench.action.openEditorAtIndex7",
+        "workbench.action.openEditorAtIndex8",
+        "workbench.action.openEditorAtIndex9",
+        "workbench.action.focusFirstEditorGroup",
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.focusThirdEditorGroup",
+        "workbench.action.focusFourthEditorGroup",
+        "workbench.action.focusFifthEditorGroup",
+        "workbench.action.focusSixthEditorGroup",
+        "workbench.action.focusSeventhEditorGroup",
+        "workbench.action.focusEighthEditorGroup",
+        "workbench.action.focusNinthEditorGroup",
+        "workbench.action.focusLastEditorGroup",
+        "workbench.action.focusPreviousGroup",
+        "workbench.action.focusNextGroup",
+        "workbench.action.focusAboveGroup",
+        "workbench.action.focusBelowGroup",
+        "workbench.action.focusLeftGroup",
+        "workbench.action.focusRightGroup",
+        "workbench.action.moveEditorToPreviousGroup",
+        "workbench.action.moveEditorToNextGroup",
+        "workbench.action.moveEditorToAboveGroup",
+        "workbench.action.moveEditorToBelowGroup",
+        "workbench.action.moveEditorToLeftGroup",
+        "workbench.action.moveEditorToRightGroup",
+        "workbench.action.moveEditorToFirstGroup",
+        "workbench.action.moveEditorToLastGroup",
+        "workbench.action.joinAllGroups",
+        "workbench.action.joinTwoGroups",
+        "workbench.action.newEditorGroupLeft",
+        "workbench.action.newEditorGroupRight",
+        "workbench.action.newEditorGroupAbove",
+        "workbench.action.newEditorGroupBelow",
+        "workbench.action.moveEditorGroupIntoNewWindow",
+        "workbench.action.copyEditorGroupIntoNewWindow",
+        "workbench.action.moveEditorIntoNewWindow",
+        "workbench.action.copyEditorIntoNewWindow",
+        "workbench.action.newEmptyEditorWindow"
+      ]
+    },
+    "useNlbForNal": true,
+    "agentUrlConfig": {
+      "agentUrl": "https://agentn.global.api5.cursor.sh",
+      "agentnUrl": "https://agentn.global.api5.cursor.sh"
+    },
+    "cliSandboxDefaultEnabled": false,
+    "claudeCodeHooksEnabled": true,
+    "onboardingConfig": {
+      "marketplacePluginNames": [
+        "datadog",
+        "figma",
+        "notion-workspace"
+      ]
+    },
+    "bugbotConfig": {},
+    "codebaseTelemetryConfig": {
+      "enabled": true
+    }
+  }
+}
